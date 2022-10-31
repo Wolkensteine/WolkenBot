@@ -1,3 +1,4 @@
+import datetime
 import math
 import time
 import random
@@ -6,8 +7,6 @@ import discord
 
 intents = discord.Intents.default()
 intents.message_content = True
-
-
 def start_vote(author, channel, duration):
     MyClient.vote_running = True
     MyClient.vote_creator = author
@@ -16,26 +15,18 @@ def start_vote(author, channel, duration):
         MyClient.vote_duration = int(duration)
     else:
         MyClient.vote_duration = 600
-
-
 def check_vote_creator(author):
     if MyClient.vote_creator == str(author):
         return True
     else:
         return False
-
-
 def check_vote_running():
     if MyClient.vote_running:
         return True
     else:
         return False
-
-
 def vote_confirm():
     MyClient.vote_running = False
-
-
 def add_vote(theme):
     MyClient.voting_themes = MyClient.voting_themes + [theme]
 
@@ -47,7 +38,6 @@ class MyClient(discord.Client):
     voting_themes = []
     vote_running = False
     vote_duration = 30
-
     letter_array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
                     'u', 'v', 'w', 'x', 'y', 'z']
     emoji_array = ['🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸', '🇹',
@@ -88,7 +78,6 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if message.author == client.user:
             return
-
         if message.content.lower() == "hallo bot" or message.content.lower() == "hello bot" or message.content.lower() \
                 == "hallo wolkenbot" or message.content.lower() == "hello wolkenbot" or message.content.lower() == \
                 "moin wolkenbot":
@@ -109,8 +98,13 @@ class MyClient(discord.Client):
                                 "the Message as an embed, which might corrupt files attached to the message!]\n"
                                 "!math => Has some cool math functions implemented. Run !math.help to see all the "
                                 "commands of !math",
-                    colour=0xff8c1a
+                    colour=0xff8c1a,
+                    url="https://Github.com/Wolkensteine/WolkenBot",
+                    timestamp=datetime.datetime.utcnow()
                 )
+                embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                 icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                          "WolkensteineIcon.png")
                 await message.channel.send(embed=embed)
                 await message.delete()
             elif message.content.lower() == "!friend":
@@ -120,8 +114,13 @@ class MyClient(discord.Client):
                 if check_vote_running():
                     embed = discord.Embed(
                         title="There is a voting already running. Please try later again!",
-                        colour=0xff0000
+                        colour=0xff0000,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
                     )
+                    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                              "WolkensteineIcon.png")
                     await message.channel.send(embed=embed)
                 else:
                     if message.content.replace("!vote", "") == "":
@@ -136,18 +135,28 @@ class MyClient(discord.Client):
                                     "things is limited by the amount of letters! If you put more in query it"
                                     "won't work!\nYou specified a duration of " + str(MyClient.vote_duration) +
                                     " seconds.",
-                        colour=0xccffff
+                        colour=0xccffff,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
                     )
+                    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                              "WolkensteineIcon.png")
                     await message.author.send(embed=embed)
                     await message.delete()
             elif message.content.lower() == "!info":
                 embed = discord.Embed(
                     title="Info",
-                    description="Version: 0.0.1 (Development version of WolkenBot)\nThis version of the bot may have "
+                    description="Version: 0.0.2 (Development version of WolkenBot)\nThis version of the bot may have "
                                 "bugs or inefficiencies. When you have any problems either report directly to "
                                 "@Wolkensteine or to your server administrator",
-                    colour=0x00ccff
+                    colour=0x00ccff,
+                    url="https://Github.com/Wolkensteine/WolkenBot",
+                    timestamp=datetime.datetime.utcnow()
                 )
+                embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                 icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                          "WolkensteineIcon.png")
                 await message.channel.send(embed=embed)
             elif message.content.lower().startswith("!pin"):
                 temp_text = message.content.replace("!pin ", "")
@@ -155,8 +164,13 @@ class MyClient(discord.Client):
                 embed = discord.Embed(
                     title="Message from: " + str(message.author),
                     description=temp_text,
-                    colour=0xaaffaa
+                    colour=0xaaffaa,
+                    url="https://Github.com/Wolkensteine/WolkenBot",
+                    timestamp=datetime.datetime.utcnow()
                 )
+                embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                 icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                          "WolkensteineIcon.png")
 
                 pin = await message.channel.send(embed=embed)
                 await pin.pin()
@@ -169,8 +183,13 @@ class MyClient(discord.Client):
                     embed = discord.Embed(
                         title="Math.Root",
                         description=temp_text,
-                        colour=0xcc33ff
+                        colour=0xcc33ff,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
                     )
+                    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                              "WolkensteineIcon.png")
                     await message.channel.send(embed=embed)
                 elif message.content.lower().replace("!math.", "").startswith("square"):
                     inputs = message.content.lower().replace("!math.square ", "").split("^")
@@ -178,32 +197,53 @@ class MyClient(discord.Client):
                     embed = discord.Embed(
                         title="Math.Square",
                         description=temp_text,
-                        color=0xcc33ff
+                        color=0xcc33ff,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
                     )
+                    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                              "WolkensteineIcon.png")
                     await message.channel.send(embed=embed)
                 elif message.content.lower() == "!math.help":
                     embed = discord.Embed(
                         title="Math.Help",
                         description="Use '.' instead of ',' in case you are not used to the english version\n!math.root"
                                     " n number => nth root of number\n!math.square number^number => number^number = ?",
-                        colour=0xff8c1a
+                        colour=0xff8c1a,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
                     )
+                    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                              "WolkensteineIcon.png")
                     await message.channel.send(embed=embed)
                 else:
                     embed = discord.Embed(
                         title="Unknown Command",
                         description="I can't remember this command :frowning: type !math.help to get some help if "
                                     "you need it.",
-                        colour=0xff0000
+                        colour=0xff0000,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
                     )
+                    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                              "WolkensteineIcon.png")
                     await message.channel.send(embed=embed)
             else:
                 embed = discord.Embed(
                     title="Unknown Command",
                     description="I can't remember this command :frowning: type !help to get some help if "
                                 "you need it.",
-                    colour=0xff0000
+                    colour=0xff0000,
+                    url="https://Github.com/Wolkensteine/WolkenBot",
+                    timestamp=datetime.datetime.utcnow()
                 )
+                embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                 icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                          "WolkensteineIcon.png")
+
                 await message.channel.send(embed=embed)
 
         elif check_vote_running():
@@ -216,12 +256,16 @@ class MyClient(discord.Client):
                         temp_text += MyClient.voting_themes[x] + " :regional_indicator_" + MyClient.letter_array[x - 1] \
                                      + ":" + "\n"
                         x += 1
-
                     embed = discord.Embed(
                         title="Vote for: " + MyClient.voting_themes[0],
                         description=temp_text,
-                        colour=0xccffff
+                        colour=0xccffff,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
                     )
+                    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                              "WolkensteineIcon.png")
 
                     vote_message = await MyClient.vote_channel.send(embed=embed)
 
@@ -229,7 +273,6 @@ class MyClient(discord.Client):
                     while x < len(MyClient.voting_themes):
                         await vote_message.add_reaction(MyClient.emoji_array[x - 1])
                         x += 1
-
                     time.sleep(int(MyClient.vote_duration))
 
                     reactions = []
@@ -237,18 +280,21 @@ class MyClient(discord.Client):
                     reactions = react_message.reactions
 
                     temp_text = ""
-
                     x = 1
                     while x < len(MyClient.voting_themes):
                         temp_text += str(x) + ". " + MyClient.voting_themes[x] + ": " + str(reactions[x - 1].count - 1)\
                                      + "\n"
                         x += 1
-
                     embed = discord.Embed(
                         title="Voting results",
                         description=temp_text,
-                        colour=0xccffff
+                        colour=0xccffff,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
                     )
+                    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                              "WolkensteineIcon.png")
 
                     await MyClient.vote_channel.send(embed=embed)
 
