@@ -303,7 +303,7 @@ class MyClient(discord.Client):
                 else:
                     add_vote(message.content)
 
-
+                    
 if __name__ == "__main__":
     client = MyClient(intents=intents)
     client.run("Secret")
