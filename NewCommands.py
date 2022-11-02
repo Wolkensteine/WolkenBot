@@ -20,3 +20,9 @@ async def rate_command(message):
 async def random_name_command(message):
     await message.channel.send("A random name for you my friend: " + Constants.player_name_array[
         random.randrange(0, len(Constants.player_name_array))])
+
+
+async def dad_jokes_by_wald(message):
+    await message.channel.send("A random dad joke from Waldi for you (" + str(message.author) + "): " + Constants.random_dad_joke_array[
+        random.randrange(0, len(Constants.random_dad_joke_array))])
+    await message.delete()
