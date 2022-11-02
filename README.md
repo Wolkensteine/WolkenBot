@@ -1,17 +1,25 @@
 # WolkenBot
 Just a small discord bot for myself and my friends<br>
-This is just the newest fully functional version of the bot.
+This is just the newest fully functional version of the bot.<br>
 
 # ToDo before using
-You will need to replace the file names for the audio files you can play with file names of files on your system.<br>
-You will need to put in your discord bot client secret<br>
-You will need to have installed some sort of ffmpeg or replace the path in the file to ffmpeg.exe<br>
-You will need to replace the API key for the google tenor api with your owns.
+<br>
+You will need to replace the file names for the audio files you can play with file names of files on your system.<br><br>
+You will need to put in your discord bot client secret<br><br>
+You will need to have installed some sort of ffmpeg or replace the path in the file to ffmpeg.exe<br><br>
+You will need to replace the API key for the google tenor api with your owns.<br>
 
-# Hardware requirements
-This bot is easily running on a raspberry pi 4b 8gb (on raspberian), I wouldn't recomend this hardware for use on many servers but for a youple of servers it should be enough. But make sure you have everything installed what you need. 
+## Hardware requirements
+<br>
+This bot is easily running on a raspberry pi 4b 8gb (on raspberian), I wouldn't recomend this hardware for use on many servers but for a youple of servers it should be enough.
 
-# Feature list (This might be out of date when I don't remember to add the features here!)
+## Other requirements
+<br>
+You will need Python (just get the newest version it should work fine) and pip<br>
+Some sort of ffmpeg (as an .exe file on windows or installed on linux)<br>
+A lot of librarys. When you execute the main.py file you'll get some error messages so just follow those but you should at least have python.py installed.<br>
+
+### Feature list (This might be out of date when I don't remember to add the features here!)
 Hello bot => Sends you back a hello and reacts with a wave hand on your message<br><br>
 !help => Gives you help to the bot (may be out of date sometimes)<br><br>
 !friend => Will send you a random message<br><br>
