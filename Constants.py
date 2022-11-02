@@ -96,3 +96,26 @@ random_sentence_array = ["Hello my new friend!",
                          "There appeares to be a technical problem with your device please contact the support.",
                          "Discord is going to be bought by Elon Musk!",
                          "System.out.println(\"Hello World!\");"]
+
+random_dad_joke_array = ["Cat puns really freak meowt I ain't kitten.",
+                         "I know a lot of good jokes about umbrellas, but they usually go over peoples heads.",
+                         "Singing in the shower is fun, until you get soap in your mouth. Then it's a soap opera.",
+                         "Why do fathers take an extra pair of socks when they go golfing? In case they get a hole in "
+                         "one.",
+                         "What do you call a fake noodle? An impasta.",
+                         "I got hit in the head with a can of coke. Thank god it's a soft drink.",
+                         "What did the man say, after walking into a bar? Ouch didn't see that there.",
+                         "Why do seagulls fly over the ocean? Because if they flew over  the bay, we'd call them "
+                         "bagles.",
+                         "Yesterday I accidentally swallowed some food coloring. The doctor sayd I'm fine, but I feel "
+                         "like I've dyed a little insinde.",
+                         "Did you know the first french fries weren't even cooked in France? They were cooked in "
+                         "grease.",
+                         "What is a kidnappers favorite shoe? A white Van.",
+                         "How do you make holy water? You boil the hell out of it.",
+                         "What do vegetarian zombies eat? Graaaains.",
+                         "I have way to many dad jokes in my dad-a-base.",
+                         "I bought a pair of shoes from a drug dealer. I dont know what he laced them whith, but I was "
+                         "tripping all day.",
+                         "Whats the difference between bird flu and swine flu? Bird flu requires tweetment, swine flu "
+                         "requires oinkment."]
