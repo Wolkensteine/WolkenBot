@@ -5,7 +5,6 @@ from DiscordBot import vote, CommonCommands, InformationGivingCommands, MathComm
 intents = discord.Intents.default()
 intents.message_content = True
 class MyClient(discord.Client):
-    Tenor_API_key = "AIzaSyC73YyzRYEKGMbbTJBT2GA-CTKb0TY5y7k"
     vote_channel = None
     vote_creator = ""
     votes_per_theme = []
@@ -58,7 +57,12 @@ class MyClient(discord.Client):
         elif vote.check_vote_running():
             await vote.confirm(message)
 
-                    
+
 if __name__ == "__main__":
+    # Exclude this when you don't specify your keys in a separate file like I am.
+    f = open("keys.txt")
+    content = f.read().splitlines()
+    discord_secret = content[0]
+
     client = MyClient(intents=intents)
-    client.run("Secret")
+    client.run(discord_secret)
