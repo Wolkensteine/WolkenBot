@@ -1,7 +1,7 @@
 import discord
 import datetime
 import random
-from DiscordBot import Constants
+import Constants
 
 
 async def rate_command(message):
