@@ -55,6 +55,8 @@ class MyClient(discord.Client):
                 await NewCommands.rate_command(message)
             elif message.content.lower().startswith("!randomname"):
                 await NewCommands.random_name_command(message)
+            elif message.content.lower().startswith("!dadjoke"):
+                await NewCommands.dad_jokes_by_wald(message)
             else:
                 await CommonCommands.command_unknown(message)
 
