@@ -81,10 +81,11 @@ async def play_command(message):
 
 
 async def gif_command(message):
+    key = "YourKey"  # replace by your key!
     search_term = message.content.lower().replace("!gif ", "")
     r = requests.get(
         "https://tenor.googleapis.com/v2/search?q=%s&key=%s&client_key=%s&limit=%s" % (
-            search_term, main.MyClient.Tenor_API_key, "WolkenBot", 1))
+            search_term, key, "WolkenBot", 1))
 
     if r.status_code == 200:
         gif_json = r.json()
@@ -107,12 +108,10 @@ async def gif_command(message):
 async def friend_command(message):
     if message.content.lower().replace("!friend", "") != "":
         temp_text = "Here is a list of answers on the !friend command: \n"
-
         x = 0
         while x < len(Constants.random_sentence_array):
             temp_text += Constants.random_sentence_array[x] + "\n"
             x += 1
-
         embed = discord.Embed(
             title="I'll help you out my friend!",
             description=temp_text,
