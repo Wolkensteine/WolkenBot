@@ -7,3 +7,6 @@ You will need to replace the file names for the audio files you can play with fi
 You will need to put in your discord bot client secret<br>
 You will need to have installed some sort of ffmpeg or replace the path in the file to ffmpeg.exe<br>
 You will need to replace the API key for the google tenor api with your owns.
+
+# Hardware requirements
+This bot is easily running on a raspberry pi 4b 8gb (on raspberian), I wouldn't recomend this hardware for use on many servers but for a youple of servers it should be enough. But make sure you have everything installed what you need. 
