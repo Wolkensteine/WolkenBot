@@ -1,5 +1,9 @@
 import discord
-from DiscordBot import vote, CommonCommands, InformationGivingCommands, MathCommands, NewCommands
+import vote
+import CommonCommands
+import InformationGivingCommands
+import MathCommands
+import NewCommands
 
 
 intents = discord.Intents.default()
