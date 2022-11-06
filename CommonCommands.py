@@ -73,11 +73,11 @@ async def play_command(message):
         embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
                          icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                                   "WolkensteineIcon.png")
-        await message.channel.send(embed=embed)
-        while channel.is_playing():
-            time.sleep(1)
-        channel.stop()
-        await channel.disconnect()
+    await message.channel.send(embed=embed)
+    while channel.is_playing():
+        time.sleep(1)
+    channel.stop()
+    await channel.disconnect()
 
 
 async def gif_command(message):
