@@ -5,9 +5,9 @@ import Constants
 
 
 async def rate_command(message):
-    temp_text = message.content.lower().replace("!rate", "")
+    temp_text = message.content.lower().replace("!rate ", "")
     embed = discord.Embed(
-        title="Rate: ",
+        title="Rate: " + temp_text,
         colour=0xaaffaa,
         url="https://Github.com/Wolkensteine/WolkenBot",
         timestamp=datetime.datetime.utcnow()
@@ -15,6 +15,11 @@ async def rate_command(message):
     embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
                      icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                               "WolkensteineIcon.png")
+    rate_message = await message.channel.send(embed=embed)
+    x = 0
+    while x < 11:
+        await rate_message.add_reaction(Constants.number_emoji_array[x])
+        x += 1
 
 
 async def random_name_command(message):
