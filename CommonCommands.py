@@ -85,11 +85,11 @@ async def gif_command(message):
     search_term = message.content.lower().replace("!gif ", "")
     r = requests.get(
         "https://tenor.googleapis.com/v2/search?q=%s&key=%s&client_key=%s&limit=%s" % (
-            search_term, key, "WolkenBot", 1))
+            search_term, key, "WolkenBot", 10))
 
     if r.status_code == 200:
         gif_json = r.json()
-        gif = gif_json['results'][0]["media_formats"]["tinygif"]["url"]
+        gif = gif_json['results'][random.randrange(0, 9)]["media_formats"]["tinygif"]["url"]
         embed = discord.Embed(
             title=str(message.author) + " searched: " + search_term,
             colour=0xaaffaa,
