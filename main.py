@@ -4,6 +4,7 @@ import CommonCommands
 import InformationGivingCommands
 import MathCommands
 import NewCommands
+import admin
 
 
 intents = discord.Intents.default()
@@ -57,6 +58,8 @@ class MyClient(discord.Client):
                 await NewCommands.random_name_command(message)
             elif message.content.lower().startswith("!dadjoke"):
                 await NewCommands.dad_jokes_by_wald(message)
+            elif message.content.lower().startswith("!admin"):
+                await admin.admin_commands(message)
             else:
                 await CommonCommands.command_unknown(message)
 
