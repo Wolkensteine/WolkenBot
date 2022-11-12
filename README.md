@@ -1,13 +1,20 @@
 # WolkenBot
 Just a small discord bot for myself and my friends<br>
-This is just the newest fully functional version of the bot.<br>
+This is just the newest fully functional version of the bot.<br><br><br>
+
+## Releases
+[Releases] (https://github.com/Wolkensteine/WolkenBot/releases) are not always up to date and might lack some features added since the release came up. They won't update themself. The bot is ready to run but doesn't check for newer versions. This might be added later though. <br>
+If you want the newest things (which are working correctly) just download the main branch itself.
+
+
+
 <br><br>
 
 ## Work in progress
 Currently working on adding the possibility for admins of a server to configure who can access which commands
 
 <br><br>
-# Feature list (This might be out of date when I don't remember to add the features here!)
+## Feature list (This might be out of date when I don't remember to add the features here!)
 Hello bot => Sends you back a hello and reacts with a wave hand on your message<br><br>
 !help => Gives you help to the bot (may be out of date sometimes)<br><br>
 !friend => Will send you a random message<br><br>
@@ -25,18 +32,18 @@ Hello bot => Sends you back a hello and reacts with a wave hand on your message<
 
 
 
-# ToDo before using
+## ToDo before using
 <br>
 You will need to replace the file names for the audio files you can play with file names of files on your system.<br><br>
 You will need to put in your discord bot client secret<br><br>
 You will need to have installed some sort of ffmpeg or replace the path in the file to ffmpeg.exe<br><br>
 You will need to replace the API key for the google tenor api with your owns.<br>
 
-## Hardware requirements
+### Hardware requirements
 <br>
 This bot is easily running on a raspberry pi 4b 8gb (on raspberian), I wouldn't recomend this hardware for use on many servers but for a youple of servers it should be enough.
 
-## Other requirements
+### Other requirements
 <br>
 You will need Python (just get the newest version it should work fine) and pip<br>
 Some sort of ffmpeg (as an .exe file on windows or installed on linux)<br>
