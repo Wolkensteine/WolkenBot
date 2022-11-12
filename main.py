@@ -16,6 +16,18 @@ class MyClient(discord.Client):
     voting_themes = []
     vote_running = False
     vote_duration = 30
+    
+    # rights that might be granted
+    # if a role is not in one of the categories it will default to mediumaccess or a specified access of default_access
+    access_all = []
+    medium_access = []
+    no_access = []
+    # Default to what level of access
+    default_access = []
+    # Array with the server names to see which level must be loaded
+    servers = []
+    
+    
     async def on_ready(self):
         print("Beep bop, Wolkenbot is ready to start!")
 
