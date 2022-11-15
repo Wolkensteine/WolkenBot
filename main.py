@@ -26,6 +26,24 @@ class MyClient(discord.Client):
     default_access = []
     # Array with the server names to see which level must be loaded
     servers = []
+    # Arrays for the needed rights for a specific command
+    # 0 => access all
+    # 1 => medium access
+    # 2 => no access
+    hello_command = []
+    friend_command = []
+    vote_command = []
+    info_command = []
+    pin_command = []
+    math_command = []
+    bot_command = []
+    play_command = []
+    g_command = []
+    rate_command = []
+    random_name_command = []
+    dad_joke_command = []
+    # Admin roles
+    admin_roles = []
     
     
     async def on_ready(self):
