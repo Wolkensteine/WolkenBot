@@ -1,13 +1,89 @@
 import datetime
+import os
 import discord
 import main
 
 
+def load_server(server_name):
+    main.MyClient.servers.append(server_name)
+    file = open("./Admin/" + server_name + "_accessall.txt", 'r')
+    main.MyClient.access_all.append(file.read())
+    file.close()
+    file = open("./Admin/" + server_name + "_mediumaccess.txt", 'r')
+    main.MyClient.medium_access.append(file.read())
+    file.close()
+    file = open("./Admin/" + server_name + "_noaccess.txt", 'r')
+    main.MyClient.no_access.append(file.read())
+    file.close()
+    file = open("./Admin/" + server_name + "_command_access.txt", 'r')
+
+    tmp = file.read().split(" ")
+
+    main.MyClient.hello_command.append(tmp[0])
+    main.MyClient.friend_command.append(tmp[1])
+    main.MyClient.vote_command.append(tmp[2])
+    main.MyClient.info_command.append(tmp[3])
+    main.MyClient.pin_command.append(tmp[4])
+    main.MyClient.math_command.append(tmp[5])
+    main.MyClient.bot_command.append(tmp[6])
+    main.MyClient.play_command.append(tmp[7])
+    main.MyClient.g_command.append(tmp[8])
+    main.MyClient.rate_command.append(tmp[9])
+    main.MyClient.random_name_command.append(tmp[10])
+    main.MyClient.dad_joke_command.append(tmp[11])
+
+    file.close()
+    file = open("./Admin/" + server_name + "_admin_roles.txt", 'r')
+    main.MyClient.admin_roles.append(file.read())
+    file.close()
+
+
+def load_settings():
+    file_list = os.listdir(path=r"./Admin/")
+    for i in range(len(file_list)):
+        tmp = file_list[i].replace("_accessall.txt", "").replace("_mediumaccess.txt", "").replace("_noaccess.txt", "").\
+            replace("_command_access.txt", "").replace("_admin_roles.txt", "")
+        if type(get_server_number(tmp)) != int:
+            load_server(tmp)
+
+
 def add_server(server_name):
+    print("Adding server: " + server_name)
     main.MyClient.servers.append(server_name)
     main.MyClient.access_all.append("")
     main.MyClient.medium_access.append("")
     main.MyClient.no_access.append("")
+    main.MyClient.admin_roles.append("admin")
+
+    # Setting default rights
+    # for everything but the pin command you'll need medium privileges (all roles not on the blacklist)
+    # only for the pin command you'll need full rights
+    main.MyClient.hello_command.append(1)
+    main.MyClient.friend_command.append(1)
+    main.MyClient.vote_command.append(1)
+    main.MyClient.info_command.append(1)
+    main.MyClient.pin_command.append(0)
+    main.MyClient.math_command.append(1)
+    main.MyClient.bot_command.append(1)
+    main.MyClient.play_command.append(1)
+    main.MyClient.g_command.append(1)
+    main.MyClient.rate_command.append(1)
+    main.MyClient.random_name_command.append(1)
+    main.MyClient.dad_joke_command.append(1)
+
+    server_num = get_server_number(server_name)
+
+    file = open("./Admin/" + server_name + "_accessall.txt", 'w')
+    file.close()
+    file = open("./Admin/" + server_name + "_mediumaccess.txt", 'w')
+    file.close()
+    file = open("./Admin/" + server_name + "_noaccess.txt", 'w')
+    file.close()
+    file = open("./Admin/" + server_name + "_command_access.txt", 'w')
+    file.close()
+    file = open("./Admin/" + server_name + "_admin_roles.txt", 'w')
+    file.close()
+    save(server_name)
 
 
 def get_server_number(server_name):
@@ -19,17 +95,31 @@ def get_server_number(server_name):
 
 def save(server):
     server_num = get_server_number(server)
-    with open("./Admin/" + server + "_accessall.txt") as file:
+    with open("./Admin/" + server + "_accessall.txt", 'w') as file:
         file.write(main.MyClient.access_all[server_num])
-    with open("./Admin/" + server + "_mediumaccess.txt") as file:
+    with open("./Admin/" + server + "_mediumaccess.txt", 'w') as file:
         file.write(main.MyClient.medium_access[server_num])
-    with open("./Admin/" + server + "_noaccess.txt") as file:
+    with open("./Admin/" + server + "_noaccess.txt", 'w') as file:
         file.write(main.MyClient.no_access[server_num])
+    with open("./Admin/" + server + "_admin_roles.txt", 'w') as file:
+        file.write(main.MyClient.admin_roles[server_num])
+    with open("./Admin/" + server + "_command_access.txt", 'w') as file:
+        file.write(str(main.MyClient.hello_command[server_num]) + " " +
+                   str(main.MyClient.friend_command[server_num]) + " " +
+                   str(main.MyClient.vote_command[server_num]) + " " +
+                   str(main.MyClient.info_command[server_num]) + " " +
+                   str(main.MyClient.pin_command[server_num]) + " " +
+                   str(main.MyClient.math_command[server_num]) + " " +
+                   str(main.MyClient.bot_command[server_num]) + " " +
+                   str(main.MyClient.play_command[server_num]) + " " +
+                   str(main.MyClient.g_command[server_num]) + " " +
+                   str(main.MyClient.rate_command[server_num]) + " " +
+                   str(main.MyClient.random_name_command[server_num]) + " " +
+                   str(main.MyClient.dad_joke_command[server_num]))
 
 
 def change_access(access, roles, server):
-    print(access, roles, server)
-    if not get_server_number(server):
+    if type(get_server_number(server)) != int:
         add_server(server)
     server_num = get_server_number(server)
     if access == "accessall":
@@ -38,6 +128,14 @@ def change_access(access, roles, server):
         main.MyClient.medium_access[server_num] = roles
     elif access == "noaccess":
         main.MyClient.no_access[server_num] = roles
+    save(server)
+
+
+def change_command_rights(right, command, server):
+    if not get_server_number(server):
+        add_server(server)
+    server_num = get_server_number(server)
+
     save(server)
 
 
@@ -60,9 +158,9 @@ async def admin_rights_command(message, content):
             await message.channel.send(embed=embed)
         else:
             right = info[0]
-            roles = [discord.utils.get(message.guild.roles, name=info[1])]
+            roles = info[1]
             for i in range(len(info) - 2):
-                roles.append(discord.utils.get(message.guild.roles, name=info[i + 2]))
+                roles += " " + info[i + 2]
 
             if right == "accessall" or right == "mediumaccess" or right == "noaccess":
                 change_access(right, roles, message.guild.name)
@@ -106,8 +204,27 @@ async def admin_help(message):
 
 
 async def admin_commands(message):
+    if type(get_server_number(message.guild.name)) != int:
+        add_server(message.guild.name)
+
     # This switches between different Admin commands
-    if message.content.lower().replace("!admin.", "").startswith("rights"):
-        await admin_rights_command(message, message.content.lower().replace("!admin.rights ", ""))
-    if message.content.lower().replace("!admin.", "").startswith("help"):
-        await admin_help(message)
+    for i in range(len(main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" "))):
+        if main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" ")[i] in \
+                [y.name.lower() for y in message.author.roles]:
+            if message.content.lower().replace("!admin.", "").startswith("rights"):
+                await admin_rights_command(message, message.content.lower().replace("!admin.rights ", ""))
+            if message.content.lower().replace("!admin.", "").startswith("help"):
+                await admin_help(message)
+            return
+        else:
+            embed = discord.Embed(
+                title="Access denied!",
+                colour=0xff0000,
+                url="https://Github.com/Wolkensteine/WolkenBot",
+                timestamp=datetime.datetime.utcnow()
+            )
+            embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                             icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                      "WolkensteineIcon.png")
+
+            await message.channel.send(embed=embed)
