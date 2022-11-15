@@ -19,7 +19,7 @@ async def permission_denied(message):
 
 
 def get_role_access(message, rights):
-    tmp = ""
+    tmp = "_accessall.txt"
 
     if rights == 0:
         tmp = "_accessall.txt"
@@ -28,7 +28,7 @@ def get_role_access(message, rights):
     elif rights == 2:
         tmp = "_noaccess.txt"
 
-    with open(message.guild.name + tmp) as file:
+    with open("./Admin/" + message.guild.name + tmp) as file:
         tmp = file.read()
 
     tmp = tmp.split(" ")
@@ -51,29 +51,32 @@ def check_permissions(message, command):
     if command == "hello":
         req_rights = main.MyClient.hello_command[server_num]
     elif command == "friend":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.friend_command[server_num]
     elif command == "vote":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.vote_command[server_num]
     elif command == "info":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.info_command[server_num]
     elif command == "pin":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.pin_command[server_num]
     elif command == "math":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.math_command[server_num]
     elif command == "bot":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.bot_command[server_num]
     elif command == "play":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.play_command[server_num]
     elif command == "g":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.g_command[server_num]
     elif command == "rate":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.rate_command[server_num]
     elif command == "randomname":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.random_name_command[server_num]
     elif command == "dadjokes":
-        req_rights = main.MyClient.hello_command[server_num]
+        req_rights = main.MyClient.dad_joke_command[server_num]
 
-    return get_role_access(message, req_rights)
+    if req_rights == 2:
+        return True
+    else:
+        return get_role_access(message, req_rights)
 
 
 def load_server(server_name):
