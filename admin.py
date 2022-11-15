@@ -256,6 +256,13 @@ def change_command_rights(right, command, server):
     save(server)
 
 
+def add_role_as_admin(message):
+    main.MyClient.admin_roles[get_server_number(message.guild.name)] += " " + message.content.lower().replace("!admin."
+                                                                                                              "rights "
+                                                                                                              "admin ",
+                                                                                                              "")
+
+
 async def admin_rights_command(message, content):
     # Admins can configure rights with this command
     if content.startswith("role"):
@@ -298,6 +305,7 @@ async def admin_rights_command(message, content):
                                           "WolkensteineIcon.png")
 
                 await message.channel.send(embed=embed)
+
     elif content.startswith("command"):
         info = content.replace("command ", "").split(" ")
         if len(info) != 2:
@@ -315,6 +323,21 @@ async def admin_rights_command(message, content):
             await message.channel.send(embed=embed)
         else:
             change_command_rights(info[0], info[1], server=message.guild.name)
+
+    elif content.startswith("admin"):
+        add_role_as_admin(message)
+        tmp = main.MyClient.admin_roles[get_server_number(message.guild.name)]
+        embed = discord.Embed(
+            title="A list of admin roles: ",
+            description=tmp,
+            colour=0xff8c1a,
+            url="https://Github.com/Wolkensteine/WolkenBot",
+            timestamp=datetime.datetime.utcnow()
+        )
+        embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                         icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                  "WolkensteineIcon.png")
+        await message.channel.send(embed=embed)
 
 
 async def admin_help(message):
