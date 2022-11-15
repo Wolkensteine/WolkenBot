@@ -4,6 +4,20 @@ import discord
 import main
 
 
+async def permission_denied(message):
+    embed = discord.Embed(
+        title="Access denied!",
+        colour=0xff0000,
+        url="https://Github.com/Wolkensteine/WolkenBot",
+        timestamp=datetime.datetime.utcnow()
+    )
+    embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                     icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                              "WolkensteineIcon.png")
+
+    await message.channel.send(embed=embed)
+
+
 def get_role_access(message, rights):
     tmp = ""
 
