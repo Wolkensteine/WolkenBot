@@ -140,6 +140,18 @@ class MyClient(discord.Client):
                 else:
                     await admin.permission_denied(message)
 
+            elif message.content.lower().startswith("!mute"):
+                if admin.check_permissions(message, "mute"):
+                    await admin.mute_command(message)
+                else:
+                    await admin.permission_denied(message)
+
+            elif message.content.lower().startswith("!unmute"):
+                if admin.check_permissions(message, "mute"):
+                    await admin.un_mute_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!admin"):
                 await admin.admin_commands(message)
             else:
