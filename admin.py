@@ -4,6 +4,14 @@ import discord
 import main
 
 
+async def mute_command(message):
+    print()
+
+
+async def un_mute_command(message):
+    print()
+
+
 async def permission_denied(message):
     embed = discord.Embed(
         title="Access denied!",
@@ -72,6 +80,8 @@ def check_permissions(message, command):
         req_rights = main.MyClient.random_name_command[server_num]
     elif command == "dadjokes":
         req_rights = main.MyClient.dad_joke_command[server_num]
+    elif command == "mute":
+        req_rights = main.MyClient.mute_commands[server_num]
 
     if req_rights == 2:
         return True
@@ -106,6 +116,7 @@ def load_server(server_name):
     main.MyClient.rate_command.append(tmp[9])
     main.MyClient.random_name_command.append(tmp[10])
     main.MyClient.dad_joke_command.append(tmp[11])
+    main.MyClient.mute_commands.append(tmp[12])
 
     file.close()
     file = open("./Admin/" + server_name + "_admin_roles.txt", 'r')
@@ -146,6 +157,7 @@ def add_server(server_name):
     main.MyClient.rate_command.append(1)
     main.MyClient.random_name_command.append(2)
     main.MyClient.dad_joke_command.append(2)
+    main.MyClient.mute_commands.append(0)
 
     file = open("./Admin/" + server_name + "_accessall.txt", 'w')
     file.close()
@@ -189,7 +201,8 @@ def save(server):
                    str(main.MyClient.g_command[server_num]) + " " +
                    str(main.MyClient.rate_command[server_num]) + " " +
                    str(main.MyClient.random_name_command[server_num]) + " " +
-                   str(main.MyClient.dad_joke_command[server_num]))
+                   str(main.MyClient.dad_joke_command[server_num]) + " " +
+                   str(main.MyClient.mute_commands[server_num]))
 
 
 def change_access(access, roles, server):
@@ -238,6 +251,8 @@ def change_command_rights(right, command, server):
         main.MyClient.random_name_command[server_num] = right_num
     elif command == "dadjokes":
         main.MyClient.dad_joke_command[server_num] = right_num
+    elif command == "mute":
+        main.MyClient.mute_commands[server_num] = right_num
     save(server)
 
 
