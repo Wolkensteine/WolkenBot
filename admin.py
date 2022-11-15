@@ -4,6 +4,64 @@ import discord
 import main
 
 
+def get_role_access(message, rights):
+    tmp = ""
+
+    if rights == 0:
+        tmp = "_accessall.txt"
+    elif rights == 1:
+        tmp = "_mediumaccess.txt"
+    elif rights == 2:
+        tmp = "_noaccess.txt"
+
+    with open(message.guild.name + tmp) as file:
+        tmp = file.read()
+
+    tmp = tmp.split(" ")
+
+    for i in range(len(tmp)):
+        if tmp[i] in [y.name.lower() for y in message.author.roles]:
+            return True
+
+    for i in range(len(main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" "))):
+        if main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" ")[i] in \
+                [y.name.lower() for y in message.author.roles]:
+            return True
+        else:
+            return False
+
+
+def check_permissions(message, command):
+    server_num = get_server_number(message.guild.name)
+    req_rights = 0
+    if command == "hello":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "friend":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "vote":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "info":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "pin":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "math":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "bot":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "play":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "g":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "rate":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "randomname":
+        req_rights = main.MyClient.hello_command[server_num]
+    elif command == "dadjokes":
+        req_rights = main.MyClient.hello_command[server_num]
+
+    return get_role_access(message, req_rights)
+
+
 def load_server(server_name):
     main.MyClient.servers.append(server_name)
     file = open("./Admin/" + server_name + "_accessall.txt", 'r')
@@ -71,8 +129,6 @@ def add_server(server_name):
     main.MyClient.random_name_command.append(1)
     main.MyClient.dad_joke_command.append(1)
 
-    server_num = get_server_number(server_name)
-
     file = open("./Admin/" + server_name + "_accessall.txt", 'w')
     file.close()
     file = open("./Admin/" + server_name + "_mediumaccess.txt", 'w')
@@ -123,11 +179,11 @@ def change_access(access, roles, server):
         add_server(server)
     server_num = get_server_number(server)
     if access == "accessall":
-        main.MyClient.access_all[server_num] = roles
+        main.MyClient.access_all[server_num] = roles.lower()
     elif access == "mediumaccess":
-        main.MyClient.medium_access[server_num] = roles
+        main.MyClient.medium_access[server_num] = roles.lower()
     elif access == "noaccess":
-        main.MyClient.no_access[server_num] = roles
+        main.MyClient.no_access[server_num] = roles.lower()
     save(server)
 
 
@@ -135,7 +191,35 @@ def change_command_rights(right, command, server):
     if not get_server_number(server):
         add_server(server)
     server_num = get_server_number(server)
-
+    right_num = 2
+    if right == "accessall":
+        right_num = 0
+    elif right == "mediumaccess":
+        right_num = 1
+    if command == "hello":
+        main.MyClient.hello_command[server_num] = right_num
+    elif command == "friend":
+        main.MyClient.friend_command[server_num] = right_num
+    elif command == "vote":
+        main.MyClient.vote_command[server_num] = right_num
+    elif command == "info":
+        main.MyClient.info_command[server_num] = right_num
+    elif command == "pin":
+        main.MyClient.pin_command[server_num] = right_num
+    elif command == "math":
+        main.MyClient.math_command[server_num] = right_num
+    elif command == "bot":
+        main.MyClient.bot_command[server_num] = right_num
+    elif command == "play":
+        main.MyClient.play_command[server_num] = right_num
+    elif command == "g":
+        main.MyClient.g_command[server_num] = right_num
+    elif command == "rate":
+        main.MyClient.rate_command[server_num] = right_num
+    elif command == "randomname":
+        main.MyClient.random_name_command[server_num] = right_num
+    elif command == "dadjokes":
+        main.MyClient.dad_joke_command[server_num] = right_num
     save(server)
 
 
@@ -181,6 +265,23 @@ async def admin_rights_command(message, content):
                                           "WolkensteineIcon.png")
 
                 await message.channel.send(embed=embed)
+    elif content.startswith("command"):
+        info = content.replace("command ", "").split(" ")
+        if len(info) != 2:
+            embed = discord.Embed(
+                title="Sorry. I don't remember if this command could run without 2 arguments.",
+                description="You should try this: !admin.rights command <right> <command>",
+                colour=0xff0000,
+                url="https://Github.com/Wolkensteine/WolkenBot",
+                timestamp=datetime.datetime.utcnow()
+            )
+            embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                             icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                      "WolkensteineIcon.png")
+
+            await message.channel.send(embed=embed)
+        else:
+            change_command_rights(info[0], info[1], server=message.guild.name)
 
 
 async def admin_help(message):
@@ -189,9 +290,13 @@ async def admin_help(message):
         description="You need to have a role named admin or an other role with privileged access.\n"
                     "!admin.rights role <right> <role> * n\n"
                     "<right>s:\n"
-                    "accessall.json => grant access to all commands for a role\n"
+                    "accessall => grant access to all commands for a role\n"
                     "mediumaccess => grant access to most commands for a role\n"
-                    "noaccess => deny access to all commands for a role\n",
+                    "noaccess => deny access to all commands for a role\n"
+                    "!admin.rights command <right> <command>\n"
+                    "<command>'s: !<command>\n"
+                    "The rights are the same as above.\n"
+                    "This will set a required permission level for a command.",
         colour=0xff8c1a,
         url="https://Github.com/Wolkensteine/WolkenBot",
         timestamp=datetime.datetime.utcnow()
