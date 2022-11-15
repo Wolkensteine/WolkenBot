@@ -17,15 +17,15 @@ Hello bot => Sends you back a hello and reacts with a wave hand on your message<
 !rate + text => Lets you rate your text<br><br>
 !randomname => Will return a random name out of the name array. If you use this by yourself you may want to add some of your friend names.<br><br>
 !dadjoke (requested by BinMalKurzImWald) => Will spit out a horrible bad joke (List was also created by binMalKurzImWald)<br><br>
-
-
+!admin.help => People with Admin role will get more information <br><br>
 
 # ToDo before using
 <br>
 You will need to replace the file names for the audio files you can play with file names of files on your system.<br><br>
 You will need to put in your discord bot client secret<br><br>
 You will need to have installed some sort of ffmpeg or replace the path in the file to ffmpeg.exe<br><br>
-You will need to replace the API key for the google tenor api with your owns.<br>
+You will need to replace the API key for the google tenor api with your owns.<br><br>
+If you want to use the admin tools you'll need a role called "Admin". Also you need to have that role to use the commands. If you host this for your servers you may want to add other roles to the <servername>_admin_roles.txt file, those will also have administrative rights for the bot.
 
 ## Hardware requirements
 <br>
