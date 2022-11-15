@@ -114,20 +114,21 @@ def add_server(server_name):
     main.MyClient.admin_roles.append("admin")
 
     # Setting default rights
-    # for everything but the pin command you'll need medium privileges (all roles not on the blacklist)
-    # only for the pin command you'll need full rights
-    main.MyClient.hello_command.append(1)
-    main.MyClient.friend_command.append(1)
+    # 0 => It'll require all rights
+    # 1 => It'll require medium rights
+    # 2 => It'll require no rights
+    main.MyClient.hello_command.append(2)
+    main.MyClient.friend_command.append(2)
     main.MyClient.vote_command.append(1)
-    main.MyClient.info_command.append(1)
+    main.MyClient.info_command.append(2)
     main.MyClient.pin_command.append(0)
-    main.MyClient.math_command.append(1)
-    main.MyClient.bot_command.append(1)
+    main.MyClient.math_command.append(2)
+    main.MyClient.bot_command.append(2)
     main.MyClient.play_command.append(1)
-    main.MyClient.g_command.append(1)
+    main.MyClient.g_command.append(2)
     main.MyClient.rate_command.append(1)
-    main.MyClient.random_name_command.append(1)
-    main.MyClient.dad_joke_command.append(1)
+    main.MyClient.random_name_command.append(2)
+    main.MyClient.dad_joke_command.append(2)
 
     file = open("./Admin/" + server_name + "_accessall.txt", 'w')
     file.close()
