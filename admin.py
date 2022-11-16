@@ -70,8 +70,8 @@ def get_role_access(message, rights):
         if tmp[i] in [y.name.lower() for y in message.author.roles]:
             return True
 
-    for i in range(len(main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" "))):
-        if main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" ")[i] in \
+    for i in range(len(main.MyClient.admin_roles[get_server_number(message.guild.name)].replace("\n", "").split(" "))):
+        if main.MyClient.admin_roles[get_server_number(message.guild.name)].replace("\n", "").split(" ")[i] in \
                 [y.name.lower() for y in message.author.roles]:
             return True
         else:
@@ -155,7 +155,7 @@ def load_server(server_name):
 def load_settings():
     file_list = os.listdir(path=r"./Admin/")
     for i in range(len(file_list)):
-        tmp = file_list[i].replace("_accessall.txt", "").replace("_mediumaccess.txt", "").replace("_noaccess.txt", ""). \
+        tmp = file_list[i].replace("_accessall.txt", "").replace("_mediumaccess.txt", "").replace("_noaccess.txt", "").\
             replace("_command_access.txt", "").replace("_admin_roles.txt", "")
         if type(get_server_number(tmp)) != int:
             load_server(tmp)
