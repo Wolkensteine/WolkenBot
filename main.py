@@ -6,9 +6,11 @@ import MathCommands
 import NewCommands
 import admin
 
-
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.message_content = True
+intents.members = True
+
+
 class MyClient(discord.Client):
     vote_channel = None
     vote_creator = ""
