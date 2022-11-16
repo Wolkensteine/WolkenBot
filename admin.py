@@ -4,14 +4,39 @@ import discord
 import main
 
 
+# Mute command
+async def create_mute_role(message):
+    print("Creating mute role")
+    mute_role = await message.guild.create_role(name="Mute")
+    perms = discord.Permissions()
+    perms.update(read_messages=True, read_message_history=True, connect=True, speak=False, send_messages=False)
+    await mute_role.edit(reason=None, colour=discord.Colour.dark_grey(), permissions=perms)
+
+
+def check_for_mute_role(message):
+    if discord.utils.get(message.guild.roles, name='Mute'):
+        return True
+    else:
+        return False
+
+
 async def mute_command(message):
-    print()
+    if not check_for_mute_role(message):
+        await create_mute_role(message)
+    tmp = message.content.replace("!mute ", "").replace("!Mute", "")
+    user = discord.utils.get(message.guild.members, name=tmp)
+    await user.add_roles(discord.utils.get(message.guild.roles, name='Mute'))
 
 
 async def un_mute_command(message):
-    print()
+    if not check_for_mute_role(message):
+        await create_mute_role(message)
+    tmp = message.content.replace("!unmute ", "").replace("!Unmute", "")
+    user = discord.utils.get(message.guild.members, name=tmp)
+    await user.remove_roles(discord.utils.get(message.guild.roles, name='Mute'))
 
 
+# Permissions and their configuration
 async def permission_denied(message):
     embed = discord.Embed(
         title="Access denied!",
@@ -127,7 +152,7 @@ def load_server(server_name):
 def load_settings():
     file_list = os.listdir(path=r"./Admin/")
     for i in range(len(file_list)):
-        tmp = file_list[i].replace("_accessall.txt", "").replace("_mediumaccess.txt", "").replace("_noaccess.txt", "").\
+        tmp = file_list[i].replace("_accessall.txt", "").replace("_mediumaccess.txt", "").replace("_noaccess.txt", ""). \
             replace("_command_access.txt", "").replace("_admin_roles.txt", "")
         if type(get_server_number(tmp)) != int:
             load_server(tmp)
