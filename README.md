@@ -1,4 +1,4 @@
-# WolkenBot - v 3.0.1 (Admin Update)
+# WolkenBot - v 3.0.2 (Admin Update)
 Just a small discord bot for myself and my friends<br>
 This is just the newest fully functional version of the bot.<br><br><br>
 
