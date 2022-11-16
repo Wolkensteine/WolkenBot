@@ -54,15 +54,15 @@ async def permission_denied(message):
 def get_role_access(message, rights):
     tmp = "_accessall.txt"
 
-    if rights == 0:
+    if rights == "0":
         tmp = "_accessall.txt"
-    elif rights == 1:
+    elif rights == "1":
         tmp = "_mediumaccess.txt"
-    elif rights == 2:
-        tmp = "_noaccess.txt"
+    elif rights == "2":
+        return True
 
     with open("./Admin/" + message.guild.name + tmp) as file:
-        tmp = file.read()
+        tmp = file.read().replace("\n", "")
 
     tmp = tmp.split(" ")
 
@@ -93,6 +93,8 @@ def check_permissions(message, command):
         req_rights = main.MyClient.pin_command[server_num]
     elif command == "math":
         req_rights = main.MyClient.math_command[server_num]
+    elif command == "gif":
+        req_rights = main.MyClient.gif_command[server_num]
     elif command == "bot":
         req_rights = main.MyClient.bot_command[server_num]
     elif command == "play":
@@ -108,7 +110,7 @@ def check_permissions(message, command):
     elif command == "mute":
         req_rights = main.MyClient.mute_commands[server_num]
 
-    if req_rights == 2:
+    if req_rights == "2":
         return True
     else:
         return get_role_access(message, req_rights)
@@ -136,12 +138,13 @@ def load_server(server_name):
     main.MyClient.pin_command.append(tmp[4])
     main.MyClient.math_command.append(tmp[5])
     main.MyClient.bot_command.append(tmp[6])
-    main.MyClient.play_command.append(tmp[7])
-    main.MyClient.g_command.append(tmp[8])
-    main.MyClient.rate_command.append(tmp[9])
-    main.MyClient.random_name_command.append(tmp[10])
-    main.MyClient.dad_joke_command.append(tmp[11])
-    main.MyClient.mute_commands.append(tmp[12])
+    main.MyClient.gif_command.append(tmp[7])
+    main.MyClient.play_command.append(tmp[8])
+    main.MyClient.g_command.append(tmp[9])
+    main.MyClient.rate_command.append(tmp[10])
+    main.MyClient.random_name_command.append(tmp[11])
+    main.MyClient.dad_joke_command.append(tmp[12])
+    main.MyClient.mute_commands.append(tmp[13])
 
     file.close()
     file = open("./Admin/" + server_name + "_admin_roles.txt", 'r')
@@ -177,6 +180,7 @@ def add_server(server_name):
     main.MyClient.pin_command.append(0)
     main.MyClient.math_command.append(2)
     main.MyClient.bot_command.append(2)
+    main.MyClient.gif_command.append(1)
     main.MyClient.play_command.append(1)
     main.MyClient.g_command.append(2)
     main.MyClient.rate_command.append(1)
@@ -222,6 +226,7 @@ def save(server):
                    str(main.MyClient.pin_command[server_num]) + " " +
                    str(main.MyClient.math_command[server_num]) + " " +
                    str(main.MyClient.bot_command[server_num]) + " " +
+                   str(main.MyClient.gif_command[server_num]) + " " +
                    str(main.MyClient.play_command[server_num]) + " " +
                    str(main.MyClient.g_command[server_num]) + " " +
                    str(main.MyClient.rate_command[server_num]) + " " +
@@ -265,6 +270,8 @@ def change_command_rights(right, command, server):
     elif command == "math":
         main.MyClient.math_command[server_num] = right_num
     elif command == "bot":
+        main.MyClient.bot_command[server_num] = right_num
+    elif command == "gif":
         main.MyClient.bot_command[server_num] = right_num
     elif command == "play":
         main.MyClient.play_command[server_num] = right_num
