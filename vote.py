@@ -1,6 +1,6 @@
+import asyncio
 import datetime
 import discord
-import time
 import Constants
 from main import MyClient
 
@@ -38,7 +38,7 @@ def add_vote(theme):
 
 
 async def end_voting(vote_message):
-    time.sleep(int(MyClient.vote_duration))
+    await asyncio.sleep(int(MyClient.vote_duration))
 
     react_message = await MyClient.vote_channel.fetch_message(vote_message.id)
     reactions = react_message.reactions
