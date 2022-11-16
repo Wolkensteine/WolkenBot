@@ -374,7 +374,7 @@ async def admin_rights_command(message, content):
 
 async def admin_help(message):
     embed = discord.Embed(
-        title="Some help for you may Admin friend!",
+        title="Some help for you my Admin friend!",
         description="You need to have a role named admin or an other role with privileged access.\n"
                     "!admin.rights role <right> <role> * n\n"
                     "<right>s:\n"
@@ -402,7 +402,7 @@ async def admin_commands(message):
 
     # This switches between different Admin commands
     for i in range(len(main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" "))):
-        if main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" ")[i] in \
+        if main.MyClient.admin_roles[get_server_number(message.guild.name)].replace("\n", "").split(" ")[i] in \
                 [y.name.lower() for y in message.author.roles]:
             if message.content.lower().replace("!admin.", "").startswith("rights"):
                 await admin_rights_command(message, message.content.lower().replace("!admin.rights ", ""))
