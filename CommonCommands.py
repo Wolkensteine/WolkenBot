@@ -45,8 +45,9 @@ async def play_command(message):
     voice_channel = message.author.voice.channel
     channel = await voice_channel.connect()
     if message.content.lower().replace("!play.", "") == "frech":
+        # Remove the executable path on linux or replace it with a valid path for your ffmpeg.exe on windows
         channel.play(discord.FFmpegPCMAudio(executable="ffmpeg-5.1.2-essentials_build/bin/ffmpeg.exe",
-                                            source="frog.mp3"))
+                                            source="Frog.mp3"))
     elif message.content.lower().replace("!play.", "") == "help":
         embed = discord.Embed(
             title="Some audio help for you:",
@@ -73,6 +74,7 @@ async def play_command(message):
         embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
                          icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                                   "WolkensteineIcon.png")
+        
     await message.channel.send(embed=embed)
     while channel.is_playing():
         time.sleep(1)

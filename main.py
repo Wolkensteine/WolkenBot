@@ -4,10 +4,13 @@ import CommonCommands
 import InformationGivingCommands
 import MathCommands
 import NewCommands
+import admin
 
-
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.message_content = True
+intents.members = True
+
+
 class MyClient(discord.Client):
     vote_channel = None
     vote_creator = ""
@@ -15,6 +18,36 @@ class MyClient(discord.Client):
     voting_themes = []
     vote_running = False
     vote_duration = 30
+    
+    # rights that might be granted
+    # if a role is not in one of the categories it will default to mediumaccess or a specified access of default_access
+    access_all = []
+    medium_access = []
+    no_access = []
+    # Default to what level of access
+    default_access = []
+    # Array with the server names to see which level must be loaded
+    servers = []
+    # Arrays for the needed rights for a specific command
+    # 0 => access all
+    # 1 => medium access
+    # 2 => no access
+    hello_command = []
+    friend_command = []
+    vote_command = []
+    info_command = []
+    pin_command = []
+    math_command = []
+    bot_command = []
+    play_command = []
+    g_command = []
+    rate_command = []
+    random_name_command = []
+    dad_joke_command = []
+    # Admin roles
+    admin_roles = []
+    
+    
     async def on_ready(self):
         print("Beep bop, Wolkenbot is ready to start!")
 
@@ -32,31 +65,97 @@ class MyClient(discord.Client):
 
         if message.content.startswith("!"):
             if message.content.lower() == "!help":
-                await InformationGivingCommands.help_command(message)
+                if admin.check_permissions(message, "help"):
+                    await InformationGivingCommands.help_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!friend"):
-                await CommonCommands.friend_command(message)
+                if admin.check_permissions(message, "friend"):
+                    await CommonCommands.friend_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!vote"):
-                await vote.start(message)
+                if admin.check_permissions(message, "vote"):
+                    await vote.start(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower() == "!info":
-                await InformationGivingCommands.info_command(message)
+                if admin.check_permissions(message, "info"):
+                    await InformationGivingCommands.info_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!pin"):
-                await CommonCommands.pin_command(message)
+                if admin.check_permissions(message, "pin"):
+                    await CommonCommands.pin_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!math."):
-                await MathCommands.Math_command(message)
+                if admin.check_permissions(message, "math"):
+                    await MathCommands.Math_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!bot"):
-                await InformationGivingCommands.bot_command(message)
+                if admin.check_permissions(message, "bot"):
+                    await InformationGivingCommands.bot_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!gif"):
-                await CommonCommands.gif_command(message)
+                if admin.check_permissions(message, "gif"):
+                    await CommonCommands.gif_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!play."):
-                await CommonCommands.play_command(message)
+                if admin.check_permissions(message, "play"):
+                    await CommonCommands.play_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower() == "!g":
-                await CommonCommands.g_command(message)
+                if admin.check_permissions(message, "g"):
+                    await CommonCommands.g_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!rate"):
-                await NewCommands.rate_command(message)
+                if admin.check_permissions(message, "rate"):
+                    await NewCommands.rate_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!randomname"):
-                await NewCommands.random_name_command(message)
+                if admin.check_permissions(message, "randomname"):
+                    await NewCommands.random_name_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!dadjoke"):
-                await NewCommands.dad_jokes_by_wald(message)
+                if admin.check_permissions(message, "dadjokes"):
+                    await NewCommands.dad_jokes_by_wald(message)
+                else:
+                    await admin.permission_denied(message)
+
+            elif message.content.lower().startswith("!mute"):
+                if admin.check_permissions(message, "mute"):
+                    await admin.mute_command(message)
+                else:
+                    await admin.permission_denied(message)
+
+            elif message.content.lower().startswith("!unmute"):
+                if admin.check_permissions(message, "mute"):
+                    await admin.un_mute_command(message)
+                else:
+                    await admin.permission_denied(message)
+
+            elif message.content.lower().startswith("!admin"):
+                await admin.admin_commands(message)
             else:
                 await CommonCommands.command_unknown(message)
 
