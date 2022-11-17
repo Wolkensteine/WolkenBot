@@ -154,6 +154,20 @@ class MyClient(discord.Client):
                 else:
                     await admin.permission_denied(message)
 
+            elif message.content.lower().startswith("!fishmaster") or \
+                    message.content.lower().startswith("!fischmeister"):
+                if admin.check_permissions(message, "fishmaster"):
+                    await FrogUpdate.fish_master_command(message)
+                else:
+                    await admin.permission_denied(message)
+
+            elif message.content.lower().startswith("!donotannoy") or \
+                    message.content.lower().startswith("!nervnicht"):
+                if admin.check_permissions(message, "donotannoy"):
+                    await FrogUpdate.do_not_annoy_command(message)
+                else:
+                    await admin.permission_denied(message)
+
             elif message.content.lower().startswith("!admin"):
                 await admin.admin_commands(message)
             else:
