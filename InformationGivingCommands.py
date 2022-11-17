@@ -35,7 +35,8 @@ async def help_command(message):
             "!g => Sends you a random Frog death message.\n"
             "!rate + text => Lets you rate sth easily\n"
             "!randomname => returns a random name\n"
-            "!dadjoke => sends you a dad joke (feature requested by binMalKurzImWald)",
+            "!dadjoke => sends you a dad joke (feature requested by binMalKurzImWald)\n"
+            "!admin.help => help you if you have the 'Admin'-Role",
         colour=0xff8c1a,
         url="https://Github.com/Wolkensteine/WolkenBot",
         timestamp=datetime.datetime.utcnow()
