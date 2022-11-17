@@ -5,6 +5,7 @@ import InformationGivingCommands
 import MathCommands
 import NewCommands
 import admin
+import FrogUpdate
 
 intents = discord.Intents.all()
 intents.message_content = True
