@@ -109,6 +109,10 @@ def check_permissions(message, command):
         req_rights = main.MyClient.dad_joke_command[server_num]
     elif command == "mute":
         req_rights = main.MyClient.mute_commands[server_num]
+    elif command == "fishmaster":
+        req_rights = main.MyClient.fish_master_command[server_num]
+    elif command == "donotannoy":
+        req_rights = main.MyClient.do_not_annoy_command[server_num]
 
     if req_rights == "2":
         return True
@@ -145,6 +149,8 @@ def load_server(server_name):
     main.MyClient.random_name_command.append(tmp[11])
     main.MyClient.dad_joke_command.append(tmp[12])
     main.MyClient.mute_commands.append(tmp[13])
+    main.MyClient.fish_master_command.append(tmp[14])
+    main.MyClient.do_not_annoy_command.append(tmp[15])
 
     file.close()
     file = open("./Admin/" + server_name + "_admin_roles.txt", 'r')
@@ -187,6 +193,8 @@ def add_server(server_name):
     main.MyClient.random_name_command.append(2)
     main.MyClient.dad_joke_command.append(2)
     main.MyClient.mute_commands.append(0)
+    main.MyClient.fish_master_command.append(1)
+    main.MyClient.do_not_annoy_command.append(0)
 
     file = open("./Admin/" + server_name + "_accessall.txt", 'w')
     file.close()
@@ -232,7 +240,9 @@ def save(server):
                    str(main.MyClient.rate_command[server_num]) + " " +
                    str(main.MyClient.random_name_command[server_num]) + " " +
                    str(main.MyClient.dad_joke_command[server_num]) + " " +
-                   str(main.MyClient.mute_commands[server_num]))
+                   str(main.MyClient.mute_commands[server_num]) + " " +
+                   str(main.MyClient.fish_master_command[server_num]) + " " +
+                   str(main.MyClient.do_not_annoy_command[server_num]))
 
 
 def change_access(access, roles, server):
@@ -285,6 +295,10 @@ def change_command_rights(right, command, server):
         main.MyClient.dad_joke_command[server_num] = right_num
     elif command == "mute":
         main.MyClient.mute_commands[server_num] = right_num
+    elif command == "fishmaster":
+        main.MyClient.fish_master_command[server_num] = right_num
+    elif command == "donotannoy":
+        main.MyClient.do_not_annoy_command[server_num] = right_num
     save(server)
 
 
