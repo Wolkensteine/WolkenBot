@@ -7,12 +7,6 @@ This is just the newest fully functional version of the bot.<br><br><br>
 If you want the newest things (which are working correctly) just download the main branch itself.
 
 
-
-<br><br>
-
-## Work in progress
-Currently working on adding the possibility for admins of a server to configure who can access which commands
-
 <br><br>
 ## Feature list (This might be out of date when I don't remember to add the features here!)
 Hello bot => Sends you back a hello and reacts with a wave hand on your message<br><br>

@@ -5,6 +5,7 @@ import InformationGivingCommands
 import MathCommands
 import NewCommands
 import admin
+import FrogUpdate
 
 intents = discord.Intents.all()
 intents.message_content = True
@@ -151,6 +152,20 @@ class MyClient(discord.Client):
             elif message.content.lower().startswith("!unmute"):
                 if admin.check_permissions(message, "mute"):
                     await admin.un_mute_command(message)
+                else:
+                    await admin.permission_denied(message)
+
+            elif message.content.lower().startswith("!fishmaster") or \
+                    message.content.lower().startswith("!fischmeister"):
+                if admin.check_permissions(message, "fishmaster"):
+                    await FrogUpdate.fish_master_command(message)
+                else:
+                    await admin.permission_denied(message)
+
+            elif message.content.lower().startswith("!donotannoy") or \
+                    message.content.lower().startswith("!nervnicht"):
+                if admin.check_permissions(message, "donotannoy"):
+                    await FrogUpdate.do_not_annoy_command(message)
                 else:
                     await admin.permission_denied(message)
 

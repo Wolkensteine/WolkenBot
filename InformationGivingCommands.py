@@ -51,7 +51,7 @@ async def help_command(message):
 async def info_command(message):
     embed = discord.Embed(
         title="Info",
-        description="Version: 3.0.3 \nWhen you have any problems either report directly to "
+        description="Version: 4.1.0 (Beta) \nWhen you have any problems either report directly to "
                     "@Wolkensteine or to your server administrator",
         colour=0x00ccff,
         url="https://Github.com/Wolkensteine/WolkenBot",
