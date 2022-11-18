@@ -24,16 +24,20 @@ async def mute_command(message):
     if not check_for_mute_role(message):
         await create_mute_role(message)
     tmp = message.content.replace("!mute ", "").replace("!Mute", "")
-    user = discord.utils.get(message.guild.members, name=tmp)
-    await user.add_roles(discord.utils.get(message.guild.roles, name='Mute'))
+    for member in message.guild.members:
+        if member.name.lower() == tmp.lower():
+            user = member
+            await user.add_roles(discord.utils.get(message.guild.roles, name='Mute'))
 
 
 async def un_mute_command(message):
     if not check_for_mute_role(message):
         await create_mute_role(message)
     tmp = message.content.replace("!unmute ", "").replace("!Unmute", "")
-    user = discord.utils.get(message.guild.members, name=tmp)
-    await user.remove_roles(discord.utils.get(message.guild.roles, name='Mute'))
+    for member in message.guild.members:
+        if member.name.lower() == tmp.lower():
+            user = member
+            await user.remove_roles(discord.utils.get(message.guild.roles, name='Mute'))
 
 
 # Permissions and their configuration
@@ -74,8 +78,8 @@ def get_role_access(message, rights):
         if main.MyClient.admin_roles[get_server_number(message.guild.name)].replace("\n", "").split(" ")[i] in \
                 [y.name.lower() for y in message.author.roles]:
             return True
-        else:
-            return False
+
+    return False
 
 
 def check_permissions(message, command):
@@ -109,6 +113,10 @@ def check_permissions(message, command):
         req_rights = main.MyClient.dad_joke_command[server_num]
     elif command == "mute":
         req_rights = main.MyClient.mute_commands[server_num]
+    elif command == "fishmaster":
+        req_rights = main.MyClient.fish_master_command[server_num]
+    elif command == "donotannoy":
+        req_rights = main.MyClient.do_not_annoy_command[server_num]
 
     if req_rights == "2":
         return True
@@ -129,7 +137,7 @@ def load_server(server_name):
     file.close()
     file = open("./Admin/" + server_name + "_command_access.txt", 'r')
 
-    tmp = file.read().split(" ")
+    tmp = file.read().replace("\n", "").split(" ")
 
     main.MyClient.hello_command.append(tmp[0])
     main.MyClient.friend_command.append(tmp[1])
@@ -145,10 +153,12 @@ def load_server(server_name):
     main.MyClient.random_name_command.append(tmp[11])
     main.MyClient.dad_joke_command.append(tmp[12])
     main.MyClient.mute_commands.append(tmp[13])
+    main.MyClient.fish_master_command.append(tmp[14])
+    main.MyClient.do_not_annoy_command.append(tmp[15])
 
     file.close()
     file = open("./Admin/" + server_name + "_admin_roles.txt", 'r')
-    main.MyClient.admin_roles.append(file.read())
+    main.MyClient.admin_roles.append(file.read().replace("\n", ""))
     file.close()
 
 
@@ -187,6 +197,8 @@ def add_server(server_name):
     main.MyClient.random_name_command.append(2)
     main.MyClient.dad_joke_command.append(2)
     main.MyClient.mute_commands.append(0)
+    main.MyClient.fish_master_command.append(1)
+    main.MyClient.do_not_annoy_command.append(0)
 
     file = open("./Admin/" + server_name + "_accessall.txt", 'w')
     file.close()
@@ -232,7 +244,9 @@ def save(server):
                    str(main.MyClient.rate_command[server_num]) + " " +
                    str(main.MyClient.random_name_command[server_num]) + " " +
                    str(main.MyClient.dad_joke_command[server_num]) + " " +
-                   str(main.MyClient.mute_commands[server_num]))
+                   str(main.MyClient.mute_commands[server_num]) + " " +
+                   str(main.MyClient.fish_master_command[server_num]) + " " +
+                   str(main.MyClient.do_not_annoy_command[server_num]))
 
 
 def change_access(access, roles, server):
@@ -285,6 +299,10 @@ def change_command_rights(right, command, server):
         main.MyClient.dad_joke_command[server_num] = right_num
     elif command == "mute":
         main.MyClient.mute_commands[server_num] = right_num
+    elif command == "fishmaster":
+        main.MyClient.fish_master_command[server_num] = right_num
+    elif command == "donotannoy":
+        main.MyClient.do_not_annoy_command[server_num] = right_num
     save(server)
 
 
@@ -397,27 +415,32 @@ async def admin_help(message):
 
 
 async def admin_commands(message):
+    global tmp
+    tmp = 0
+
     if type(get_server_number(message.guild.name)) != int:
         add_server(message.guild.name)
 
     # This switches between different Admin commands
-    for i in range(len(main.MyClient.admin_roles[get_server_number(message.guild.name)].split(" "))):
+    for i in range(len(main.MyClient.admin_roles[get_server_number(message.guild.name)].replace("\n", "").split(" "))):
         if main.MyClient.admin_roles[get_server_number(message.guild.name)].replace("\n", "").split(" ")[i] in \
                 [y.name.lower() for y in message.author.roles]:
             if message.content.lower().replace("!admin.", "").startswith("rights"):
                 await admin_rights_command(message, message.content.lower().replace("!admin.rights ", ""))
             if message.content.lower().replace("!admin.", "").startswith("help"):
                 await admin_help(message)
-            return
-        else:
-            embed = discord.Embed(
-                title="Access denied!",
-                colour=0xff0000,
-                url="https://Github.com/Wolkensteine/WolkenBot",
-                timestamp=datetime.datetime.utcnow()
-            )
-            embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
-                             icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
-                                      "WolkensteineIcon.png")
+            tmp = 1
+            break
 
-            await message.channel.send(embed=embed)
+    if tmp == 0:
+        embed = discord.Embed(
+            title="Access denied!",
+            colour=0xff0000,
+            url="https://Github.com/Wolkensteine/WolkenBot",
+            timestamp=datetime.datetime.utcnow()
+        )
+        embed.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                         icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                  "WolkensteineIcon.png")
+
+        await message.channel.send(embed=embed)
