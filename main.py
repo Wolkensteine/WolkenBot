@@ -66,10 +66,7 @@ class MyClient(discord.Client):
 
         if message.content.startswith("!"):
             if message.content.lower() == "!help":
-                if admin.check_permissions(message, "help"):
-                    await InformationGivingCommands.help_command(message)
-                else:
-                    await admin.permission_denied(message)
+                await InformationGivingCommands.help_command(message)
 
             elif message.content.lower().startswith("!friend"):
                 if admin.check_permissions(message, "friend"):
