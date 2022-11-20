@@ -1,4 +1,4 @@
-# WolkenBot - v 4.1.0 (Frog Update)
+# WolkenBot - v 4.1.1 (Frog Update)
 Just a small discord bot for myself and my friends<br>
 This is just the newest fully functional version of the bot.<br><br><br>
 
