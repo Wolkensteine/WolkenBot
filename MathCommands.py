@@ -226,7 +226,7 @@ async def math_solve(message, inputs):
             print("Beginning to calculate the result of the inputs ...")
 
             if positions_of_brackets_open or positions_of_brackets_close:
-                if positions_of_brackets_open and positions_of_brackets_close:
+                if len(positions_of_brackets_open) == len(positions_of_brackets_close):
                     print()
                 else:
                     errors = 1
