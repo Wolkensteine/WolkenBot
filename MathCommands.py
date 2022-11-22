@@ -219,6 +219,7 @@ async def math_solve(message, inputs):
         print("All mathematical operators categorized.")
 
         if equation:
+            # Beginning to solve equation
             print("Beginning to analyze equation ...")
         else:
             # Calculate the result
