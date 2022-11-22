@@ -227,7 +227,8 @@ async def math_solve(message, inputs):
 
             if positions_of_brackets_open or positions_of_brackets_close:
                 if len(positions_of_brackets_open) == len(positions_of_brackets_close):
-                    print()
+                    for i in range(len(positions_of_brackets_open)):
+                        print()
                 else:
                     errors = 1
                     print("There was a standalone bracket!")
@@ -241,6 +242,10 @@ async def math_solve(message, inputs):
                     output.set_footer(text="Message send by WolkenBot made by Wolkensteine",
                                       icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
                                                "WolkensteineIcon.png")
+
+            # Other stuff
+            if errors == 0:
+                print()
 
         if errors == 0:
             print("Solved the math. Now formatting output ...")
