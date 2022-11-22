@@ -163,43 +163,66 @@ async def math_solve(message, inputs):
     # If no error occurred try to calculate the result
     if errors == 0:
         print("Solving math ...")
+
+        print("Getting positions of mathematical operators ...")
+
+        # Mathematical operators
+        # (
+        # )
+        # ln()
+        # n.log()
+        # n.root()
+        # x^n
+        # *
+        # /
+        # +
+        # -
+        # =
+
+        # look for all the operators
+        positions_of_brackets_open = []
+        positions_of_brackets_close = []
+        positions_of_lns = []
+        positions_of_logs = []
+        positions_of_roots = []
+        positions_of_exponents = []
+        positions_of_multiplications = []
+        positions_of_divisions = []
+        positions_of_additions = []
+        positions_of_subtractions = []
+        positions_of_equal_sign = []
+
+        for i in range(len(extracted_inputs)):
+            if extracted_inputs[i] == "(":
+                positions_of_brackets_open.append(i)
+            elif extracted_inputs[i] == ")":
+                positions_of_brackets_close.append(i)
+            elif extracted_inputs[i] == "ln":
+                positions_of_lns.append(i)
+            elif extracted_inputs[i] == ".log":
+                positions_of_logs.append(i)
+            elif extracted_inputs[i] == ".root":
+                positions_of_roots.append(i)
+            elif extracted_inputs[i] == "^":
+                positions_of_exponents.append(i)
+            elif extracted_inputs[i] == "*":
+                positions_of_multiplications.append(i)
+            elif extracted_inputs[i] == "/":
+                positions_of_divisions.append(i)
+            elif extracted_inputs[i] == "+":
+                positions_of_additions.append(i)
+            elif extracted_inputs[i] == "-":
+                positions_of_subtractions.append(i)
+            elif extracted_inputs[i] == "=":
+                positions_of_equal_sign.append(i)
+
+        print("All mathematical operators categorized.")
+
         if equation:
             print("Beginning to analyze equation ...")
         else:
             # Calculate the result
             print("Beginning to calculate the result of the inputs ...")
-
-            # Mathematical operators
-            # (
-            # )
-            # ln()
-            # n.log()
-            # n.root()
-            # x^n
-            # *
-            # /
-            # +
-            # -
-            # =
-
-            # look for all the operators
-            positions_of_brackets_open = []
-            positions_of_brackets_close = []
-            positions_of_lns = []
-            positions_of_logs = []
-            positions_of_roots = []
-            positions_of_exponents = []
-            positions_of_multiplications = []
-            positions_of_divisions = []
-            positions_of_additions = []
-            positions_of_subtractions = []
-            positions_of_equal_sign = []
-
-            for i in range(len(extracted_inputs)):
-                if extracted_inputs[i] == "(":
-                    positions_of_brackets_close.append(i)
-                elif extracted_inputs[i] == ")":
-                    positions_of_brackets_close.append(i)
 
         print("Solved the math. Now formatting output ...")
 
