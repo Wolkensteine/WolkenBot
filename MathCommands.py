@@ -225,25 +225,43 @@ async def math_solve(message, inputs):
             # Calculate the result
             print("Beginning to calculate the result of the inputs ...")
 
-        print("Solved the math. Now formatting output ...")
+            if positions_of_brackets_open or positions_of_brackets_close:
+                if positions_of_brackets_open and positions_of_brackets_close:
+                    print()
+                else:
+                    errors = 1
+                    print("There was a standalone bracket!")
+                    output = discord.Embed(
+                        title="Error!",
+                        description="Standalone bracket detected!",
+                        colour=0xff0000,
+                        url="https://Github.com/Wolkensteine/WolkenBot",
+                        timestamp=datetime.datetime.utcnow()
+                    )
+                    output.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                                      icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                               "WolkensteineIcon.png")
 
-        tmp_output_formatted = ""
+        if errors == 0:
+            print("Solved the math. Now formatting output ...")
 
-        for i in range(len(output_description)):
-            tmp_output_formatted += output_description[i] + "\n"
+            tmp_output_formatted = ""
 
-        output = discord.Embed(
-            title=given_input,
-            description=tmp_output_formatted,
-            colour=0xcc33ff,
-            url="https://Github.com/Wolkensteine/WolkenBot",
-            timestamp=datetime.datetime.utcnow()
-        )
-        output.set_footer(text="Message send by WolkenBot made by Wolkensteine",
-                          icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
-                                   "WolkensteineIcon.png")
+            for i in range(len(output_description)):
+                tmp_output_formatted += output_description[i] + "\n"
 
-        print("Output formatted. Now sending output ...")
+            output = discord.Embed(
+                title=given_input,
+                description=tmp_output_formatted,
+                colour=0xcc33ff,
+                url="https://Github.com/Wolkensteine/WolkenBot",
+                timestamp=datetime.datetime.utcnow()
+            )
+            output.set_footer(text="Message send by WolkenBot made by Wolkensteine",
+                              icon_url="https://raw.githubusercontent.com/Wolkensteine/Wolkensteine/main/"
+                                       "WolkensteineIcon.png")
+
+            print("Output formatted. Now sending output ...")
 
     await message.channel.send(embed=output)
 
