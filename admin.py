@@ -83,6 +83,9 @@ def get_role_access(message, rights):
 
 
 def check_permissions(message, command):
+    if isinstance(message.channel, discord.channel.DMChannel):
+        return True
+
     server_num = get_server_number(message.guild.name)
     req_rights = 0
     if command == "hello":
