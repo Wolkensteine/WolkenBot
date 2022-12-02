@@ -1,3 +1,9 @@
+![GitHub Repo stars](https://img.shields.io/github/stars/Wolkensteine/WolkenBot?label=Stars%20%3A%20%29)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Wolkensteine/WolkenBot)
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/Wolkensteine/WolkenBot)
+![Lines of code](https://img.shields.io/tokei/lines/github.com/Wolkensteine/WolkenBot)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Wolkensteine/WolkenBot)
+
 # WolkenBot - v 4.1.1 (Frog Update)
 Just a small discord bot for myself and my friends<br>
 This is just the newest fully functional version of the bot.<br><br><br>
