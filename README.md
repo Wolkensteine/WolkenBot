@@ -8,6 +8,30 @@ If you want the newest things (which are working correctly) just download the ma
 
 
 <br><br>
+
+
+
+# ToDo before using
+<br>
+You will need to replace the file names for the audio files you can play with file names of files on your system.<br><br>
+You will need to put in your discord bot client secret<br><br>
+You will need to have installed some sort of ffmpeg or replace the path in the file to ffmpeg.exe<br><br>
+You will need to replace the API key for the google tenor api with your owns.<br><br>
+If you want to use the admin tools you'll need a role called "Admin". Also you need to have that role to use the commands. If you host this for your servers you may want to add other roles to the <servername>_admin_roles.txt file, those will also have administrative rights for the bot.<br><br>
+You may want to configure a "Mute"-role, which will be added to all people you !mute
+
+## Hardware requirements
+<br>
+This bot is easily running on a raspberry pi 4b 8gb (on raspberian), I wouldn't recomend this hardware for use on many servers but for a youple of servers it should be enough.
+
+## Other requirements
+<br>
+You will need Python (just get the newest version it should work fine) and pip<br>
+Some sort of ffmpeg (as an .exe file on windows or installed on linux)<br>
+A lot of librarys. When you execute the main.py file you'll get some error messages so just follow those but you should at least have python.py installed.<br><br><br>
+
+
+
 ## Feature list (This might be out of date when I don't remember to add the features here!)
 Hello bot => Sends you back a hello and reacts with a wave hand on your message<br><br>
 !help => Gives you help to the bot (may be out of date sometimes)<br><br>
@@ -26,22 +50,3 @@ Hello bot => Sends you back a hello and reacts with a wave hand on your message<
 !admin.help => People with Admin role will get more information <br><br>
 !mute <name> => Will mute <name> (By default only for high priveleged users)<br>
 !unmute <name> => opposite of !mute (By default only for high priveleged users)
-
-## ToDo before using
-<br>
-You will need to replace the file names for the audio files you can play with file names of files on your system.<br><br>
-You will need to put in your discord bot client secret<br><br>
-You will need to have installed some sort of ffmpeg or replace the path in the file to ffmpeg.exe<br><br>
-You will need to replace the API key for the google tenor api with your owns.<br><br>
-If you want to use the admin tools you'll need a role called "Admin". Also you need to have that role to use the commands. If you host this for your servers you may want to add other roles to the <servername>_admin_roles.txt file, those will also have administrative rights for the bot.<br><br>
-You may want to configure a "Mute"-role, which will be added to all people you !mute
-
-### Hardware requirements
-<br>
-This bot is easily running on a raspberry pi 4b 8gb (on raspberian), I wouldn't recomend this hardware for use on many servers but for a youple of servers it should be enough.
-
-### Other requirements
-<br>
-You will need Python (just get the newest version it should work fine) and pip<br>
-Some sort of ffmpeg (as an .exe file on windows or installed on linux)<br>
-A lot of librarys. When you execute the main.py file you'll get some error messages so just follow those but you should at least have python.py installed.<br>
