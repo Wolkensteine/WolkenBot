@@ -4,7 +4,8 @@ This is just the newest fully functional version of the bot.<br><br><br>
 
 ## Releases
 [Releases](https://github.com/Wolkensteine/WolkenBot/releases) are not always up to date and might lack some features added since the release came up. They won't update themself. The bot is ready to run but doesn't check for newer versions. This might be added later though. <br>
-If you want the newest things (which are working correctly) just download the main branch itself.
+If you want the newest things (which are working correctly) just download the main branch itself.<br>
+###### Currently working on some math problems
 
 
 <br><br>
