@@ -19,14 +19,12 @@ class MyClient(discord.Client):
     voting_themes = []
     vote_running = False
     vote_duration = 30
-    
+
     # rights that might be granted
-    # if a role is not in one of the categories it will default to mediumaccess or a specified access of default_access
+    # if a role is not in one of the categories it will default to mediumaccess
     access_all = []
     medium_access = []
     no_access = []
-    # Default to what level of access
-    default_access = []
     # Array with the server names to see which level must be loaded
     servers = []
     # Arrays for the needed rights for a specific command
@@ -40,21 +38,25 @@ class MyClient(discord.Client):
     pin_command = []
     math_command = []
     bot_command = []
+    gif_command = []
     play_command = []
     g_command = []
     rate_command = []
     random_name_command = []
     dad_joke_command = []
+    mute_commands = []
+    fish_master_command = []
+    do_not_annoy_command = []
     # Admin roles
     admin_roles = []
-    
-    
+
     async def on_ready(self):
         print("Beep bop, Wolkenbot is ready to start!")
 
     async def on_message(self, message):
         if message.author == client.user:
             return
+
         if message.content.lower().replace("!", "").replace("?", "").replace(".", "") == "hallo bot" \
                 or message.content.lower().replace("!", "").replace("?", "").replace(".", "") == "hello bot" \
                 or message.content.lower().replace("!", "").replace("?", "").replace(".", "") == "hallo wolkenbot" \
@@ -66,7 +68,10 @@ class MyClient(discord.Client):
 
         if message.content.startswith("!"):
             if message.content.lower() == "!help":
-                await InformationGivingCommands.help_command(message)
+                if admin.check_permissions(message, "help"):
+                    await InformationGivingCommands.help_command(message)
+                else:
+                    await admin.permission_denied(message)
 
             elif message.content.lower().startswith("!friend"):
                 if admin.check_permissions(message, "friend"):
@@ -182,4 +187,5 @@ if __name__ == "__main__":
     discord_secret = content[0]
 
     client = MyClient(intents=intents)
+    admin.load_settings()
     client.run(discord_secret)
