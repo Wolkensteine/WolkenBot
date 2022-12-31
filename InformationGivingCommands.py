@@ -51,8 +51,10 @@ async def help_command(message):
 async def info_command(message):
     embed = discord.Embed(
         title="Info",
-        description="Version: 4.1.0 (Beta) \nWhen you have any problems either report directly to "
-                    "@Wolkensteine or to your server administrator",
+        description="Version: 4.1.1 \nWhen you have any problems either report directly to "
+                    "@Wolkensteine or to your server administrator\n"
+                    "There is now an official discord!\n"
+                    "My invite link: https://discord.gg/vk9v2x4EjT",
         colour=0x00ccff,
         url="https://Github.com/Wolkensteine/WolkenBot",
         timestamp=datetime.datetime.utcnow()
