@@ -3,6 +3,7 @@
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/Wolkensteine/WolkenBot)
 ![Lines of code](https://img.shields.io/tokei/lines/github.com/Wolkensteine/WolkenBot)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Wolkensteine/WolkenBot)
+![Discord](https://img.shields.io/discord/1034396323652317274?color=blue&label=Discord&logo=discord)
 
 # WolkenBot - v 4.1.1 (Frog Update)
 Just a small discord bot for myself and my friends<br>
