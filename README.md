@@ -7,7 +7,8 @@
 
 # WolkenBot - v 4.1.1 (Frog Update)
 Just a small discord bot for myself and my friends<br>
-This is just the newest fully functional version of the bot.<br><br><br>
+This is just the newest fully functional version of the bot.<br>
+Btw when you like the bot you might want to visit my discord, so feel free to join me and some friends! [invite link](https://discord.gg/vk9v2x4EjT)<br><br>
 
 ## Releases
 [Releases](https://github.com/Wolkensteine/WolkenBot/releases) are not always up to date and might lack some features added since the release came up. They won't update themself. The bot is ready to run but doesn't check for newer versions. This might be added later though. <br>
